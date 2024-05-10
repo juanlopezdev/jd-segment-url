@@ -1,0 +1,118 @@
+<!--
+  This is an example of how to use the library on a custom web mvdv.
+-->
+<script src="/dist/lib-segment-url.js"></script>
+<script>
+  const onewayRequestData = {
+    tipovuelo: 'oneway',
+    origen: 'LIM',
+    destino: 'ROM',
+    fsalida: '29-07-2022',
+    adultos: 2,
+    nino: 0,
+    infantes: 0,
+    clase: 'E'
+  }
+
+  const onewayDinamicParams = [
+    { key: 'tipovuelo', isKeyVisible: false },
+    { key: 'origen', isKeyVisible: false },
+    { key: 'destino', isKeyVisible: false },
+    { key: 'fsalida', isKeyVisible: false },
+    { key: 'adultos', isKeyVisible: false },
+    { key: 'nino', isKeyVisible: false },
+    { key: 'infantes', isKeyVisible: false },
+    { key: 'clase', isKeyVisible: false }
+  ]
+
+  const urlOneway = jdSegmentUrl.generateSegmentUrl({
+    requestData: onewayRequestData,
+    staticParam: 'flights',
+    dinamicParams: onewayDinamicParams
+  });
+
+  const roundtripRequestData = {
+    tipovuelo: 'roundtrip',
+    origen: 'LIM',
+    destino: 'ROM',
+    fsalida: '29-07-2022',
+    fllegada: '06-08-2022',
+    adultos: 2,
+    nino: 0,
+    infantes: 0,
+    clase: 'E'
+  }
+
+  const roundtripDinamicParams = [
+    { key: 'tipovuelo', isKeyVisible: false },
+    { key: 'origen', isKeyVisible: false },
+    { key: 'destino', isKeyVisible: false },
+    { key: 'fsalida', isKeyVisible: false },
+    { key: 'fllegada', isKeyVisible: false },
+    { key: 'adultos', isKeyVisible: false },
+    { key: 'nino', isKeyVisible: false },
+    { key: 'infantes', isKeyVisible: false },
+    { key: 'clase', isKeyVisible: false }
+  ]
+
+  const urlRoundtrip = jdSegmentUrl.generateSegmentUrl({
+    requestData: roundtripRequestData,
+    staticParam: 'flights',
+    dinamicParams: roundtripDinamicParams
+  });
+
+  const multicityRequestData = {
+    tipovuelo: 'multicity',
+    origen: ['LIM', 'MAD', 'ROM'],
+    destino: ['MAD', 'ROM', 'LIM'],
+    ftramo: ['29-07-2022', '09-08-2022', '21-08-2022'],
+    adultos: 2,
+    nino: 0,
+    infantes: 0,
+    clase: 'E'
+  }
+
+  const multicityDinamicParams = [
+    { key: 'tipovuelo', isKeyVisible: false },
+    {
+      key: 'origen',
+      isKeyVisible: false,
+      fieldType: 'array',
+      transformValue: {
+        typeTransform: 'ARRAY_TO_STR',
+        typeParams: { separator: ',' }
+      }
+    },
+    {
+      key: 'destino',
+      isKeyVisible: false,
+      transformValue: {
+        typeTransform: 'CUSTOM',
+        func: (value) => value.join(',')
+      }
+    },
+    { 
+      key: 'ftramo',
+      isKeyVisible: false,
+      fieldType: 'array',
+      transformValue: {
+        typeTransform: 'ARRAY_TO_STR',
+        typeParams: { separator: ',' }
+      }
+    },
+    { key: 'adultos', isKeyVisible: false },
+    { key: 'nino', isKeyVisible: false },
+    { key: 'infantes', isKeyVisible: false },
+    { key: 'clase', isKeyVisible: false }
+  ]
+
+  const urlMulticity = jdSegmentUrl.generateSegmentUrl({
+    requestData: multicityRequestData,
+    staticParam: 'flights',
+    dinamicParams: multicityDinamicParams
+  });
+
+  console.log('URL ONEWAY', urlOneway);
+  console.log('URL ROUNDTRIP', urlRoundtrip);
+  console.log('URL MULTICITY', urlMulticity);
+</script>

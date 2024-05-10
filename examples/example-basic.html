@@ -1,0 +1,35 @@
+<script src="/dist/lib-segment-url.js"></script>
+
+<script>
+  const data = {
+    tipovuelo: 'oneway',
+    origen: 'LIM',
+    destino: 'ROM',
+    fsalida: '29-07-2022,09-08-2022,21-08-2022',
+    adultos: 2,
+    nino: 0,
+    infantes: 0,
+    clase: 'E',
+    activo: 1
+  }
+
+  const dinamicParams = [
+    { key: 'tipovuelo', isKeyVisible: true },
+    { key: 'origen', isKeyVisible: false },
+    { key: 'destino', isKeyVisible: false },
+    { key: 'fsalida', isKeyVisible: false },
+    { key: 'adultos', isKeyVisible: false },
+    { key: 'nino', isKeyVisible: false },
+    { key: 'infantes', isKeyVisible: false },
+    { key: 'clase', isKeyVisible: false },
+    { key: 'activo', isKeyVisible: false }
+  ]
+
+  const url = jdSegmentUrl.generateSegmentUrl({
+    requestData: data,
+    staticParam: 'flights',
+    dinamicParams: dinamicParams
+  });
+
+  console.log('URL:', url);
+</script>

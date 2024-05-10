@@ -1,0 +1,54 @@
+<script src="/dist/lib-segment-url.js"></script>
+
+<script>
+  const data = {
+    tipovuelo: 'multicity',
+    origen: ['LIM', 'MAD', 'ROM'],
+    destino: ['MAD', 'ROM', 'LIM'],
+    ftramo: ['29-07-2022', '09-08-2022', '21-08-2022'],
+    adultos: 2,
+    nino: 0,
+    infantes: 0,
+    clase: 'E'
+  }
+
+  const dinamicParams = [
+    { key: 'tipovuelo', isKeyVisible: false },
+    {
+      key: 'origen',
+      isKeyVisible: false,
+      transformValue: {
+        typeTransform: 'CUSTOM',
+        func: (value) => value.join(',')
+      }
+    },
+    {
+      key: 'destino',
+      isKeyVisible: false,
+      transformValue: {
+        typeTransform: 'CUSTOM',
+        func: (value) => value.join(',')
+      }
+    },
+    {
+      key: 'ftramo',
+      isKeyVisible: false,
+      transformValue: {
+        typeTransform: 'CUSTOM',
+        func: (value) => value.join(',')
+      }
+    },
+    { key: 'adultos', isKeyVisible: false },
+    { key: 'nino', isKeyVisible: false },
+    { key: 'infantes', isKeyVisible: false },
+    { key: 'clase', isKeyVisible: false }
+  ]
+
+  const url = jdSegmentUrl.generateSegmentUrl({
+    requestData: data,
+    staticParam: 'flights',
+    dinamicParams: dinamicParams
+  });
+
+  console.log('URL:', url);
+</script>
