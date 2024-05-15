@@ -24,15 +24,15 @@ interface IConfig {
   dinamicParams: IDinamicParam[]; // Parametros dinamico
 }
 
-function getSegmentByCustomFunc(fn: (val: any) => any, value: any): string {
+export function getSegmentByCustomFunc(fn: (val: any) => any, value: any): string {
   return `${fn(value)}/`;
 }
 
-function getSegmentByArrayToStrFunc(arrayValue: any[], separator: string = ','): string {
+export function getSegmentByArrayToStrFunc(arrayValue: any[], separator: string = ','): string {
   return `${arrayValue.join(separator)}/`;
 }
 
-function processTransformValue(transformValue: ITransformValue, value: any, fieldType: fieldType = 'string'): string {
+export function processTransformValue(transformValue: ITransformValue, value: any, fieldType: fieldType = 'string'): string {
   const { typeTransform, typeParams, func } = transformValue;
   switch (typeTransform) {
     case 'CUSTOM':
